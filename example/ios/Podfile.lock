@@ -23,9 +23,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
 
 SPEC CHECKSUMS:
-  ffmpeg_kit_flutter_new: 5dc6b1aa0a6f6a97c878783cd4b70fc4e4d77dfe
+  ffmpeg_kit_flutter_new: 97b2c798a30c08fac1381ff76202fd67d325df2f
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
 
 PODFILE CHECKSUM: e9941a5854938bf016e83b9b55e2f0a9a65921ff
 
