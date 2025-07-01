@@ -129,9 +129,25 @@ Pod::Spec.new do |s|
     # Adding pre-install hook
     s.prepare_command = <<-CMD
       if [ ! -d "./Frameworks" ]; then
-        chmod +x ../scripts/setup_ios.sh
-        ../scripts/setup_ios.sh
+        # Use local framework.zip file instead of downloading
+        if [ -f "./frameworks.zip" ]; then
+          mkdir -p Frameworks
+          unzip -o frameworks.zip -d Frameworks
+          
+          # Delete bitcode from all frameworks (same as original script)
+          xcrun bitcode_strip -r Frameworks/ffmpegkit.framework/ffmpegkit -o Frameworks/ffmpegkit.framework/ffmpegkit
+          xcrun bitcode_strip -r Frameworks/libavcodec.framework/libavcodec -o Frameworks/libavcodec.framework/libavcodec
+          xcrun bitcode_strip -r Frameworks/libavdevice.framework/libavdevice -o Frameworks/libavdevice.framework/libavdevice
+          xcrun bitcode_strip -r Frameworks/libavfilter.framework/libavfilter -o Frameworks/libavfilter.framework/libavfilter
+          xcrun bitcode_strip -r Frameworks/libavformat.framework/libavformat -o Frameworks/libavformat.framework/libavformat
+          xcrun bitcode_strip -r Frameworks/libavutil.framework/libavutil -o Frameworks/libavutil.framework/libavutil
+          xcrun bitcode_strip -r Frameworks/libswresample.framework/libswresample -o Frameworks/libswresample.framework/libswresample
+          xcrun bitcode_strip -r Frameworks/libswscale.framework/libswscale -o Frameworks/libswscale.framework/libswscale
+        else
+          echo "Error: frameworks.zip not found in the ios directory"
+          exit 1
         fi
+      fi
     CMD
     ss.source_files         = 'Classes/**/*'
     ss.public_header_files  = 'Classes/**/*.h'
